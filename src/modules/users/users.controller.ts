@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, ForbiddenException, Get, Param, ParseIntPipe, Post, Put, UseFilters, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "src/modules/auth/auth.guard";
-import { HttpExceptionFilter } from "src/common/http-exception.filter";
+import { HttpExceptionFilter } from "src/base/common/http-exception.filter";
 import { UserDto } from "./users.dto";
 import { UserService } from "./users.service";
 

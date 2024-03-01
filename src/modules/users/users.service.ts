@@ -3,8 +3,8 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { plainToInstance } from "class-transformer";
 import { UserDto } from "./users.dto";
 import { Repository } from "typeorm";
-import { success, setError } from "src/common/functions";
-import { PostgresBaseService } from "src/common/postgres/base.service";
+import { success, setError } from "src/base/common/functions";
+import { PostgresBaseService } from "src/base/common/postgres/base.service";
 import { AuthService } from "src/modules/auth/auth.service";
 import { UserEntity } from "./users.entity";
 

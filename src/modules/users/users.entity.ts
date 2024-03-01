@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty } from "class-validator";
-import { BaseEntity } from "src/common/postgres/base.entity";
+import { BaseEntity } from "src/base/common/postgres/base.entity";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({
