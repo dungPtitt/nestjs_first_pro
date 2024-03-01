@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseFilters } from "@nestjs/common";
+import { Body, Controller, Delete, ForbiddenException, Get, Param, ParseIntPipe, Post, Put, UseFilters, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "src/modules/auth/auth.guard";
 import { HttpExceptionFilter } from "src/common/http-exception.filter";
 import { UserDto } from "./users.dto";
 import { UserService } from "./users.service";
@@ -12,21 +13,27 @@ export class UserController{
   }
 
   @Post()
-  @UseFilters(new HttpExceptionFilter())
   createUser(@Body() user: UserDto): Promise<{}> {
     console.log(user)
     return this.userService.save(user)
   }
-  @UseFilters(new HttpExceptionFilter())
+
   @Put(':id')
   updateUserById(@Param('id') id: string, @Body() user: UserDto): Promise<{}> {
     return this.userService.update(id, user)
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard)
   findOne(@Param('id') id: string): Promise<{}> {
     return this.userService.findOne(id)
   }
+
+  // @Get(':id')
+  // findOne(@Param('id', ParseIntPipe) id: number): string {
+  //   return "success";
+  // }
+  
 
   @Delete(':id')
   deleteById(@Param('id') id: string): Promise<{}> {
@@ -36,5 +43,15 @@ export class UserController{
   @Delete('softDelete/:id')
   softDelete(@Param('id') id: string): Promise<{}> {
     return this.userService.softDelete(id)
+  }
+
+  @Post('register')
+  register(@Body() user: UserDto): Promise<{}> {
+    return this.userService.register(user);
+  }
+
+  @Post('login')
+  login(@Body() loginDto: Record<string, any>): Promise<{}> {
+    return this.userService.signIn(loginDto.userName, loginDto.password);
   }
 }

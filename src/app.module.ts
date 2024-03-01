@@ -1,14 +1,15 @@
 import Joi from '@hapi/joi';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthController } from './auth/auth.controller';
-import { AuthModule } from './auth/auth.module';
-import { AuthService } from './auth/auth.service';
-import { UserEntity } from './users/users.entity';
-import { UserModule } from './users/users.module';
+import { AuthController } from './modules/auth/auth.controller';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthService } from './modules/auth/auth.service';
+import { UserEntity } from './modules/users/users.entity';
+import { UserModule } from './modules/users/users.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({

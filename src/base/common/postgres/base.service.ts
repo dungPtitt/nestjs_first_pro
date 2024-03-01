@@ -12,16 +12,12 @@ export class PostgresBaseService<Entity extends BaseEntity, Dto> {
 
 
   async save(userDto: Dto): Promise<{}> {
-    // const saveUser = await this.repo.save(userDto as any);
-    // return success("create user success!");
     try{
       const saveUser = await this.repo.save(userDto as any);
       return success("create user success!");
-      // return plainToInstance(UserDto, saveUser);
     }catch(error) {
       throw new ForbiddenException(error);
     }
-    
   }
 
   async update(id: string, userDto: Dto): Promise<{}> {
@@ -40,6 +36,14 @@ export class PostgresBaseService<Entity extends BaseEntity, Dto> {
     return setError("user not found!", 404);
     
   }
+  // async login(name: string): Promise<{}> {
+  //   const user = await this.repo.findOne({where: {id: id}});
+  //   if(user) {
+  //     return success("get user success", {data: user})
+  //   }
+  //   return setError("user not found!", 404);
+    
+  // }
 
   async delete(id: string): Promise<{}> {
     const user = await this.repo.delete(id);

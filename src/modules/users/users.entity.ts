@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "class-validator";
+import { IsEmail, IsNotEmpty } from "class-validator";
 import { BaseEntity } from "src/common/postgres/base.entity";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
@@ -7,20 +7,17 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 })
 export class UserEntity extends BaseEntity{
 
-  @Column({
-    length: 50
-  })
-  @IsNotEmpty()
-  firstName: string
+  @Column()
+  userName: string
 
   @Column()
-  lastName: string
+  email: string
+
+  @Column()
+  password: string
 
   @Column({
     default: false
   })
-
   isActive: boolean
-
-
 }
